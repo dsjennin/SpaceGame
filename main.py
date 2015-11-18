@@ -38,13 +38,18 @@ def main():
 
     director.run(main_scene)
 
+
+
 #class for movement of main character
 class heroShipMovement(actions.Move):
     def step(self, dt):
-        super(heroShip, self).step(dt)
+        super(heroShipMovement, self).step(dt)
         velocity_x = 100 * (keyboard[key.RIGHT] - keyboard[key.LEFT])
         velocity_y = 100 * (keyboard[key.UP] - keyboard[key.DOWN])
         self.target.velocity = (velocity_x, velocity_y)
 
+
+
+main()
 
 
