@@ -10,7 +10,7 @@ def main():
     global keyboard
 
     #  initialzing the director. the director creates the window for the game
-    director.init(width=500, height= 300, autoscale=True, resizable = True)
+    director.init(width=400, height= 600, autoscale=True, resizable = True)
 
     #  creating a layer using the cocos2d platform
     #  different layers are used for each aspect of the game, i.e. the main character or background
@@ -47,6 +47,11 @@ class heroShipMovement(actions.Move):
         velocity_x = 100 * (keyboard[key.RIGHT] - keyboard[key.LEFT])
         velocity_y = 100 * (keyboard[key.UP] - keyboard[key.DOWN])
         self.target.velocity = (velocity_x, velocity_y)
+
+        #move = self.target.position
+        #for move in range(0, 400):
+           # move = move + 25
+           # self.target.position = move;
 
 
 
