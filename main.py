@@ -17,7 +17,7 @@ def main():
     player_layer = layer.Layer()
 
     #creating a Sprite for the main character
-    heroShip = sprite.Sprite('boss.png')
+    heroShip = sprite.Sprite('hero.png')
 
     #adding the main character to the 'player_layer' layer
     player_layer.add(heroShip)
@@ -25,6 +25,13 @@ def main():
     #initializing the main character's position and velocity
     heroShip.position = (100, 100)
     heroShip.velocity = (0, 0)
+
+    #creating a background layer
+    background_layer = layer.Layer()
+    background = sprite.Sprite('space_wallpaper.png')
+
+    #adding backgound image to background layer
+    background_layer.add(background)
 
     #initializing pyglet, which allows for keyboard import for character movement
 
@@ -34,7 +41,7 @@ def main():
     #assigning the movement class to the heroShip sprite
     heroShip.do(heroShipMovement())
 
-    main_scene = scene.Scene(player_layer)
+    main_scene = scene.Scene(background_layer, player_layer)
 
     director.run(main_scene)
 
