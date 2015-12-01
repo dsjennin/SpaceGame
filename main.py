@@ -33,6 +33,21 @@ def main():
     #adding backgound image to background layer
     background_layer.add(background)
 
+    #adding sprites that contain the asteroid images.
+    asteroid_1 = sprite.Sprite('asteroid.png')
+    asteroid_2 = sprite.Sprite('asteroid_2.png')
+
+    asteroid_1.position = (150, 150)
+    asteroid_1.velocity = (0, 0)
+    asteroid_2.position = (200, 200)
+    asteroid_2.velocity = (100, 25)
+
+    #creating a layer for the asteroids
+    asteroid_layer = layer.Layer()
+    asteroid_layer.add(asteroid_1)
+    asteroid_layer.add(asteroid_2)
+
+
     #initializing pyglet, which allows for keyboard import for character movement
 
     keyboard = key.KeyStateHandler()
@@ -41,7 +56,7 @@ def main():
     #assigning the movement class to the heroShip sprite
     heroShip.do(heroShipMovement())
 
-    main_scene = scene.Scene(background_layer, player_layer)
+    main_scene = scene.Scene(background_layer, player_layer, asteroid_layer)
 
     director.run(main_scene)
 
