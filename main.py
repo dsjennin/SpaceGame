@@ -14,13 +14,13 @@ def main():
 
     #  creating a layer using the cocos2d platform
     #  different layers are used for each aspect of the game, i.e. the main character or background
-    player_layer = layer.Layer()
+    game_layer = layer.Layer()
 
     #creating a Sprite for the main character
     heroShip = sprite.Sprite('hero.png')
 
     #adding the main character to the 'player_layer' layer
-    player_layer.add(heroShip)
+    game_layer.add(heroShip)
 
     #initializing the main character's position and velocity
     heroShip.position = (100, 100)
@@ -42,10 +42,9 @@ def main():
     asteroid_2.position = (200, 200)
     asteroid_2.velocity = (100, 25)
 
-    #creating a layer for the asteroids
-    asteroid_layer = layer.Layer()
-    asteroid_layer.add(asteroid_1)
-    asteroid_layer.add(asteroid_2)
+    #adding asteroids to game layer
+    game_layer.add(asteroid_1)
+    game_layer.add(asteroid_2)
 
 
     #initializing pyglet, which allows for keyboard import for character movement
@@ -56,7 +55,7 @@ def main():
     #assigning the movement class to the heroShip sprite
     heroShip.do(heroShipMovement())
 
-    main_scene = scene.Scene(background_layer, player_layer, asteroid_layer)
+    main_scene = scene.Scene(background_layer, game_layer)
 
     director.run(main_scene)
 
