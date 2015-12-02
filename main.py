@@ -55,10 +55,12 @@ def main():
     #assigning the movement class to the heroShip sprite
     heroShip.do(heroShipMovement())
 
+    asteroid_1.do(actions.MoveBy( (0, -300), 4) )
+
+
     main_scene = scene.Scene(background_layer, game_layer)
 
     director.run(main_scene)
-
 
 
 #class for movement of main character
@@ -73,6 +75,11 @@ class heroShipMovement(actions.Move):
         #for move in range(0, 400):
            # move = move + 25
            # self.target.position = move;
+
+
+
+
+
 
 
 
