@@ -37,9 +37,9 @@ def main():
     asteroid_1 = sprite.Sprite('asteroid.png')
     asteroid_2 = sprite.Sprite('asteroid_2.png')
 
-    asteroid_1.position = (150, 150)
+    asteroid_1.position = (150, 550)
     asteroid_1.velocity = (0, 0)
-    asteroid_2.position = (200, 200)
+    asteroid_2.position = (200, 550)
     asteroid_2.velocity = (100, 25)
 
     #adding asteroids to game layer
@@ -55,20 +55,21 @@ def main():
     #assigning the movement class to the heroShip sprite
     heroShip.do(heroShipMovement())
 
-    asteroid_1.do(actions.MoveBy( (0, -300), 4) )
-
+    asteroid_1.do(actions.MoveBy( (0, -600), 4) )
+    asteroid_2.do(actions.MoveBy( (0, -600), 8) )
 
     main_scene = scene.Scene(background_layer, game_layer)
 
     director.run(main_scene)
 
 
+
 #class for movement of main character
 class heroShipMovement(actions.Move):
     def step(self, dt):
         super(heroShipMovement, self).step(dt)
-        velocity_x = 100 * (keyboard[key.RIGHT] - keyboard[key.LEFT])
-        velocity_y = 100 * (keyboard[key.UP] - keyboard[key.DOWN])
+        velocity_x = 200 * (keyboard[key.RIGHT] - keyboard[key.LEFT])
+        velocity_y = 200 * (keyboard[key.UP] - keyboard[key.DOWN])
         self.target.velocity = (velocity_x, velocity_y)
 
         #move = self.target.position
