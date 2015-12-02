@@ -1,0 +1,13 @@
+TODO:
+
+-Add randomized spawn points for asteroids
+-create a class that determines difficulty 
+	-difficulty will be determined by steroid speed
+-create a scoring system
+	-game will last until ship collides with asteroid
+-create a menu screen
+-fix the background placement 
+-add collision
+	-when the ship hits an asteroid the game ends 
+-create a high scores page (?)
+-create a HUD 
