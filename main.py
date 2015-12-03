@@ -4,6 +4,10 @@ from pyglet.window import key
 import cocos
 from cocos import actions, layer, sprite, scene
 from cocos.director import director
+import cocos.collision_model as cm
+import cocos.euclid as eu
+
+
 
 def main():
 
@@ -18,6 +22,7 @@ def main():
 
     #creating a Sprite for the main character
     heroShip = sprite.Sprite('hero.png')
+    heroShip.cshape = cm.AARectShape(eu.Vector2(heroShip.position), 32, 32)
 
     #adding the main character to the 'player_layer' layer
     game_layer.add(heroShip)
@@ -35,7 +40,9 @@ def main():
 
     #adding sprites that contain the asteroid images.
     asteroid_1 = sprite.Sprite('asteroid.png')
+    asteroid_1.cshape = cm.CircleShape(eu.Vector2(asteroid_1.position), 16)
     asteroid_2 = sprite.Sprite('asteroid_2.png')
+    asteroid_2.cshape = cm.CircleShape(eu.Vector2(asteroid_1.position), 16)
 
     asteroid_1.position = (150, 550)
     asteroid_1.velocity = (0, 0)
@@ -61,6 +68,8 @@ def main():
     main_scene = scene.Scene(background_layer, game_layer)
 
     director.run(main_scene)
+
+
 
 
 
