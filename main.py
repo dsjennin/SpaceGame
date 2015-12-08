@@ -21,15 +21,16 @@ def main():
     game_layer = layer.Layer()
 
     #creating a Sprite for the main character
-    heroShip = sprite.Sprite('hero.png')
-    heroShip.cshape = cm.AARectShape(eu.Vector2(heroShip.position), 32, 32)
+    heroimage = pyglet.resource.image('hero.png')
+    player = HeroShip(heroimage)
+    #heroShip.cshape = cm.AARectShape(eu.Vector2(heroShip.position), 32, 32)
 
     #adding the main character to the 'player_layer' layer
-    game_layer.add(heroShip)
+    game_layer.add(player)
 
     #initializing the main character's position and velocity
-    heroShip.position = (100, 100)
-    heroShip.velocity = (0, 0)
+    #heroShip.position = (100, 100)
+    #heroShip.velocity = (0, 0)
 
     #creating a background layer
     background_layer = layer.Layer()
@@ -45,7 +46,7 @@ def main():
     asteroid_2.cshape = cm.CircleShape(eu.Vector2(asteroid_1.position), 16)
 
     asteroid_1.position = (150, 550)
-    asteroid_1.velocity = (0, 0)
+    asteroid_1.velocity = (0, 1000)
     asteroid_2.position = (200, 550)
     asteroid_2.velocity = (100, 25)
 
@@ -60,10 +61,10 @@ def main():
     director.window.push_handlers(keyboard)
 
     #assigning the movement class to the heroShip sprite
-    heroShip.do(heroShipMovement())
+    player.do(HeroShipMovement())
 
     asteroid_1.do(actions.MoveBy( (0, -600), 4) )
-    asteroid_2.do(actions.MoveBy( (0, -600), 8) )
+    asteroid_2.do(actions.MoveBy( (100, -600), 8) )
 
     main_scene = scene.Scene(background_layer, game_layer)
 
@@ -74,9 +75,9 @@ def main():
 
 
 #class for movement of main character
-class heroShipMovement(actions.Move):
+class HeroShipMovement(actions.Move):
     def step(self, dt):
-        super(heroShipMovement, self).step(dt)
+        super(HeroShipMovement, self).step(dt)
         velocity_x = 200 * (keyboard[key.RIGHT] - keyboard[key.LEFT])
         velocity_y = 200 * (keyboard[key.UP] - keyboard[key.DOWN])
         self.target.velocity = (velocity_x, velocity_y)
@@ -89,7 +90,22 @@ class heroShipMovement(actions.Move):
 
 
 
+class HeroShip(cocos.sprite.Sprite):
+    def __init__(self, image):
+        super(HeroShip, self).__init__(image)
+        self.image = image
+        self.position = (100, 100)
+        self.velocity = (0,0)
+        self.cshape = cm.AARectShape(eu.Vector2(self.position), 32, 32)
 
+
+class Asteroid(cocos.sprite.Sprite):
+    def __init__(self, image, position):
+        super(Asteroid, self).__init__(image)
+        self.image = image
+        self.position = position
+        self.velocity = (0,0)
+        self.cshape = cm.CircleShape(eu.Vector2(self.position), 16)
 
 
 
