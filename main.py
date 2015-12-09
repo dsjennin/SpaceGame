@@ -70,7 +70,7 @@ def main():
 
     director.run(main_scene)
 
-
+# Test comment from Dave. 
 
 
 
@@ -120,6 +120,3 @@ class CollisionManager(cocos.collision_model.CollisionManager):
 
 
 main()
-
-
-
