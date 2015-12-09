@@ -35,7 +35,8 @@ def main():
 
     #creating a background layer
     background_layer = layer.Layer()
-    background = sprite.Sprite('space_wallpaper.png')
+    background = sprite.Sprite('space_wallpaper.jpeg')
+    background.position = (200, 300)
 
     #adding backgound image to background layer
     background_layer.add(background)
@@ -137,6 +138,7 @@ class GameLayer(cocos.layer.Layer):
         asteroid_x = random.randrange(10, 390)
         asterPosition = (asteroid_x, 610)
         asterVelocity = (0, 1000)
+
         #RNG for choosing an image when the sprite is created
         randomPic = random.randrange(0, 1)
         asteroid = Asteroid(asteroid_pics[randomPic], asterPosition)
