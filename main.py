@@ -109,6 +109,7 @@ class Asteroid(cocos.sprite.Sprite):
 
 
 
+
 main()
 
 
