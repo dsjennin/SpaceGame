@@ -124,7 +124,7 @@ class GameLayer(cocos.layer.Layer):
         self.hero = HeroShip(heroImage)
         # hero.position = (150, 150)
         self.hero.do(HeroShipMovement())
-        self.add(hero)
+        self.add(self.hero)
 
     #def add_boss(self):
         #bossImage = pyglet.resource.image('boss.png')
@@ -143,7 +143,7 @@ class GameLayer(cocos.layer.Layer):
         randomPic = random.randrange(0, 1)
         self.asteroid = Asteroid(asteroid_pics[randomPic], asterPosition)
 
-        self.add(asteroid)
+        self.add(self.asteroid)
 
         #creating a random number for the speed of the asteroid
         randomAsteroidSpeed = random.randrange(2, 5)
