@@ -154,9 +154,9 @@ class GameLayer(cocos.layer.Layer):
 
     def update(self, dt):
         self.CollMan.clear()
-        self.CollMan.add(self.player)
+        self.CollMan.add(self.hero)
         self.CollMan.add(self.asteroid)
-
+        self.CollMan.they_collide(self.hero, self.asteroid)
 
 
 main()
