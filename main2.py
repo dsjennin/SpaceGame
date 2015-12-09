@@ -73,9 +73,6 @@ def main():
     director.run(main_scene)
 
 
-
-
-
 #class for movement of main character
 class HeroShipMovement(actions.Move):
     def step(self, dt):
@@ -88,8 +85,6 @@ class HeroShipMovement(actions.Move):
         #for move in range(0, 400):
            # move = move + 25
            # self.target.position = move;
-
-
 
 
 class HeroShip(cocos.sprite.Sprite):
@@ -117,14 +112,14 @@ class GameLayer(cocos.layer.Layer):
     def __init__(self):
         super(GameLayer, self).__init__()
         self.add_hero()
-        self.add_boss()
-
+        self.add_asteroids()
+        # self.add_boss()
 
     def add_hero(self):
         heroImage = pyglet.resource.image('hero.png')
         # hero = cocos.sprite.Sprite(heroImage)
         hero = HeroShip(heroImage)
-        hero.position = (150, 150)
+        # hero.position = (150, 150)
         hero.do(HeroShipMovement())
         self.add(hero)
 
@@ -133,5 +128,20 @@ class GameLayer(cocos.layer.Layer):
         boss = cocos.sprite.Sprite(bossImage)
         boss.position = (300, 200)
         self.add(boss)
+
+    def add_asteroids(self):
+        aster1Image = pyglet.resource.image('asteroid.png')
+        aster1Position = (150, 550)
+        aster1Velocity = (0, 1000)
+
+        aster2Image = pyglet.resource.image('asteroid_2.png')
+        aster2Position = (200, 550)
+        aster2Velocity = (100, 25)
+
+        asteroid1 = Asteroid(aster1Image, aster1Position)
+        asteroid2 = Asteroid(aster2Image, aster2Position)
+        # boss.position = (300, 200)
+        self.add(asteroid1)
+        self.add(asteroid2)
 
 main()
