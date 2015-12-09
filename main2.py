@@ -114,6 +114,7 @@ class GameLayer(cocos.layer.Layer):
         self.add_hero()
         self.add_asteroids()
         # self.add_boss()
+        self.CollMan = cm.CollisionManager()
 
     def add_hero(self):
         heroImage = pyglet.resource.image('hero.png')
