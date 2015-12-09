@@ -40,19 +40,19 @@ def main():
     background_layer.add(background)
 
     #adding sprites that contain the asteroid images.
-    asteroid_1 = sprite.Sprite('asteroid.png')
-    asteroid_1.cshape = cm.CircleShape(eu.Vector2(asteroid_1.position), 16)
-    asteroid_2 = sprite.Sprite('asteroid_2.png')
-    asteroid_2.cshape = cm.CircleShape(eu.Vector2(asteroid_1.position), 16)
+    # asteroid_1 = sprite.Sprite('asteroid.png')
+    # asteroid_1.cshape = cm.CircleShape(eu.Vector2(asteroid_1.position), 16)
+    # asteroid_2 = sprite.Sprite('asteroid_2.png')
+    # asteroid_2.cshape = cm.CircleShape(eu.Vector2(asteroid_1.position), 16)
 
-    asteroid_1.position = (150, 550)
-    asteroid_1.velocity = (0, 1000)
-    asteroid_2.position = (200, 550)
-    asteroid_2.velocity = (100, 25)
+    # asteroid_1.position = (150, 550)
+    # asteroid_1.velocity = (0, 1000)
+    # asteroid_2.position = (200, 550)
+    # asteroid_2.velocity = (100, 25)
 
     #adding asteroids to game layer
-    game_layer.add(asteroid_1)
-    game_layer.add(asteroid_2)
+    # game_layer.add(asteroid_1)
+    # game_layer.add(asteroid_2)
 
 
     #initializing pyglet, which allows for keyboard import for character movement
@@ -63,8 +63,8 @@ def main():
     #assigning the movement class to the heroShip sprite
     # player.do(HeroShipMovement())
 
-    asteroid_1.do(actions.MoveBy( (0, -600), 4) )
-    asteroid_2.do(actions.MoveBy( (100, -600), 8) )
+    # asteroid_1.do(actions.MoveBy( (0, -600), 4) )
+    # asteroid_2.do(actions.MoveBy( (100, -600), 8) )
 
     game_layer2 = GameLayer()
 
@@ -143,5 +143,8 @@ class GameLayer(cocos.layer.Layer):
         # boss.position = (300, 200)
         self.add(asteroid1)
         self.add(asteroid2)
+
+        asteroid1.do(actions.MoveBy( (0, -600), 4) )
+        asteroid2.do(actions.MoveBy( (100, -600), 8) )
 
 main()
