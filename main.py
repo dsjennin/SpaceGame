@@ -39,20 +39,20 @@ def main():
     #adding backgound image to background layer
     background_layer.add(background)
 
-    #adding sprites that contain the asteroid images.
-    asteroid_1 = sprite.Sprite('asteroid.png')
-    asteroid_1.cshape = cm.CircleShape(eu.Vector2(asteroid_1.position), 16)
-    asteroid_2 = sprite.Sprite('asteroid_2.png')
-    asteroid_2.cshape = cm.CircleShape(eu.Vector2(asteroid_1.position), 16)
 
-    asteroid_1.position = (150, 550)
-    asteroid_1.velocity = (0, 1000)
-    asteroid_2.position = (200, 550)
-    asteroid_2.velocity = (100, 25)
+    AsteroidImage = pyglet.resource.image('asteroid.png')
+
+    asteroid = Asteroid(AsteroidImage, (200, 400))
+
 
     #adding asteroids to game layer
-    game_layer.add(asteroid_1)
-    game_layer.add(asteroid_2)
+    game_layer.add(asteroid)
+
+    game_layer.add(CollisionManager(player, asteroid))
+
+
+
+
 
 
     #initializing pyglet, which allows for keyboard import for character movement
@@ -63,12 +63,13 @@ def main():
     #assigning the movement class to the heroShip sprite
     player.do(HeroShipMovement())
 
-    asteroid_1.do(actions.MoveBy( (0, -600), 4) )
-    asteroid_2.do(actions.MoveBy( (100, -600), 8) )
+    #asteroid_1.do(actions.MoveBy( (0, -600), 4) )
+    #asteroid_2.do(actions.MoveBy( (100, -600), 8) )
 
     main_scene = scene.Scene(background_layer, game_layer)
 
     director.run(main_scene)
+
 
 
 
@@ -107,9 +108,16 @@ class Asteroid(cocos.sprite.Sprite):
         self.velocity = (0,0)
         self.cshape = cm.CircleShape(eu.Vector2(self.position), 16)
 
+class CollisionManager(cocos.collision_model.CollisionManager):
+    def __init__(self, obj1, obj2):
+        collision = cm.CollisionManager.they_collide(self, obj1, obj2)
+        return collision
+
+
 
 
 
 main()
+
 
 
