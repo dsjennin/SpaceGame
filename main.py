@@ -70,7 +70,7 @@ def main():
 
     director.run(main_scene)
 
-# Test comment from Dave. 
+# Test comment from Dave.
 
 
 
@@ -110,11 +110,25 @@ class Asteroid(cocos.sprite.Sprite):
 
 class CollisionManager(cocos.collision_model.CollisionManager):
     def __init__(self, obj1, obj2):
-        cm.CollisionManager.add(obj1)
-        cm.CollisionManager.add(obj2)
+        cm.CollisionManager.add(obj1, obj2)
+        # cm.CollisionManager.add(obj2)
         collision = cm.CollisionManager.they_collide(self, obj1, obj2)
         return collision
 
+
+class GameLayer(cocos.layer.Layer):
+
+    is_event_handler = True
+
+    def __init__(self):
+        super(GameLayer, self).__init__()
+        self.add_boss()
+
+    def add_boss(self):
+        bossImage = pyglet.resource.image('boss.png')
+        boss = cocos.sprite.Sprite(bossImage)
+        boss.position = (100, 100)
+        self.add(boss)
 
 
 
