@@ -135,7 +135,7 @@ class GameLayer(cocos.layer.Layer):
         aster1Velocity = (0, 1000)
 
         aster2Image = pyglet.resource.image('asteroid_2.png')
-        aster2Position = (200, 550)
+        aster2Position = (200, 500)
         aster2Velocity = (100, 25)
 
         asteroid1 = Asteroid(aster1Image, aster1Position)
