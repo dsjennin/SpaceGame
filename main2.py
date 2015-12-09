@@ -6,6 +6,7 @@ from cocos import actions, layer, sprite, scene
 from cocos.director import director
 import cocos.collision_model as cm
 import cocos.euclid as eu
+import random
 
 
 
@@ -124,15 +125,16 @@ class GameLayer(cocos.layer.Layer):
         hero.do(HeroShipMovement())
         self.add(hero)
 
-    def add_boss(self):
-        bossImage = pyglet.resource.image('boss.png')
-        boss = cocos.sprite.Sprite(bossImage)
-        boss.position = (300, 200)
-        self.add(boss)
+    #def add_boss(self):
+        #bossImage = pyglet.resource.image('boss.png')
+        #boss = cocos.sprite.Sprite(bossImage)
+        #boss.position = (300, 200)
+        #self.add(boss)
 
     def add_asteroids(self):
         aster1Image = pyglet.resource.image('asteroid.png')
-        aster1Position = (150, 550)
+        asteroid_x = random.randrange(10, 390)
+        aster1Position = (asteroid_x, 610)
         aster1Velocity = (0, 1000)
 
         aster2Image = pyglet.resource.image('asteroid_2.png')
@@ -145,7 +147,16 @@ class GameLayer(cocos.layer.Layer):
         self.add(asteroid1)
         self.add(asteroid2)
 
-        asteroid1.do(actions.MoveBy( (0, -600), 4) )
+
+
+        asteroid1.do(actions.MoveBy( (0, -700), 4) )
         asteroid2.do(actions.MoveBy( (100, -600), 8) )
+
+    def update(self, dt):
+        self.CollMan.clear()
+        self.CollMan.add(self.player)
+        self.CollMan.add(self.asteroid)
+
+
 
 main()
