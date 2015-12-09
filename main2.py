@@ -132,25 +132,20 @@ class GameLayer(cocos.layer.Layer):
         #self.add(boss)
 
     def add_asteroids(self):
-        aster1Image = pyglet.resource.image('asteroid.png')
+        asteroid_pics = [pyglet.resource.image('asteroid.png'), pyglet.resource.image('asteroid_2.png')]
         asteroid_x = random.randrange(10, 390)
-        aster1Position = (asteroid_x, 610)
-        aster1Velocity = (0, 1000)
+        asterPosition = (asteroid_x, 610)
+        asterVelocity = (0, 1000)
 
-        aster2Image = pyglet.resource.image('asteroid_2.png')
-        aster2Position = (200, 500)
-        aster2Velocity = (100, 25)
+        randomPic = random.randrange(0, 1)
+        asteroid = Asteroid(asteroid_pics[randomPic], asterPosition)
 
-        asteroid1 = Asteroid(aster1Image, aster1Position)
-        asteroid2 = Asteroid(aster2Image, aster2Position)
-        # boss.position = (300, 200)
-        self.add(asteroid1)
-        self.add(asteroid2)
+        self.add(asteroid)
 
+        randomAsteroidSpeed = random.randrange(2, 5)
 
+        asteroid.do(actions.MoveBy((0, -700), randomAsteroidSpeed))
 
-        asteroid1.do(actions.MoveBy( (0, -700), 4) )
-        asteroid2.do(actions.MoveBy( (100, -600), 8) )
 
     def update(self, dt):
         self.CollMan.clear()
