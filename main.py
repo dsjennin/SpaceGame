@@ -110,6 +110,8 @@ class Asteroid(cocos.sprite.Sprite):
 
 class CollisionManager(cocos.collision_model.CollisionManager):
     def __init__(self, obj1, obj2):
+        cm.CollisionManager.add(obj1)
+        cm.CollisionManager.add(obj2)
         collision = cm.CollisionManager.they_collide(self, obj1, obj2)
         return collision
 
