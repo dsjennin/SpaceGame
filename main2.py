@@ -132,16 +132,18 @@ class GameLayer(cocos.layer.Layer):
         #self.add(boss)
 
     def add_asteroids(self):
+        #creating an array that stores the two images for the asteroid sprite
         asteroid_pics = [pyglet.resource.image('asteroid.png'), pyglet.resource.image('asteroid_2.png')]
         asteroid_x = random.randrange(10, 390)
         asterPosition = (asteroid_x, 610)
         asterVelocity = (0, 1000)
-
+        #RNG for choosing an image when the sprite is created
         randomPic = random.randrange(0, 1)
         asteroid = Asteroid(asteroid_pics[randomPic], asterPosition)
 
         self.add(asteroid)
 
+        #creating a random number for the speed of the asteroid
         randomAsteroidSpeed = random.randrange(2, 5)
 
         asteroid.do(actions.MoveBy((0, -700), randomAsteroidSpeed))
