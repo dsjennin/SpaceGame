@@ -81,6 +81,7 @@ class Asteroid(cocos.sprite.Sprite):
         self.position = position
         self.velocity = (0,0)
         self.cshape = cm.CircleShape(eu.Vector2(self.position), 16)
+        self.type = 'asteroid'
 
 
 class GameLayer(cocos.layer.Layer):
@@ -92,8 +93,15 @@ class GameLayer(cocos.layer.Layer):
         self.CollMan = cm.CollisionManager()
         self.add_hero()
         self.add_asteroids()
+        self.boom()
         # self.add_boss()
-        # self.CollMan.add(hero)
+        self.CollMan.add(self.hero)
+        self.CollMan.add(self.asteroid1)
+        self.CollMan.add(self.asteroid2)
+
+        self.check_known
+        # iterator for "count" method test.
+        self.i = 100
         self.schedule(self.update)
 
     def add_hero(self):
@@ -128,11 +136,47 @@ class GameLayer(cocos.layer.Layer):
         self.asteroid1.do(actions.MoveBy( (0, -600), 4) )
         self.asteroid2.do(actions.MoveBy( (100, -600), 8) )
 
+    def boom(self):
+        self.msg_boom = cocos.text.Label('BOOM!',
+                                 font_name='Times New Roman',
+                                 font_size=32,
+                                 anchor_x='center', anchor_y='center')
+
+        self.msg_boom.position = 320, 440
+        self.add(self.msg_boom)
+
+    def counter(self, count):
+        self.msg_counter = cocos.text.Label('Count = ' + str(count),
+                                 font_name='Times New Roman',
+                                 font_size=32,
+                                 anchor_x='center', anchor_y='center')
+        msg_x = 120
+        self.msg_counter.position = ((120 + count), 240)
+        self.add(self.msg_counter)
+
+    def check_collision(self):
+        for other in self.CollMan.iter_colliding(self.hero):
+            actor_type = other.type
+            if actor_type == 'asteroid':
+                self.boom()
+
+    def check_known(self):
+        if self.CollMan.knows(self.hero):
+            self.boom()
+
+    # def update(self, dt):
     def update(self, dt):
-        self.CollMan.clear()
-        self.CollMan.add(self.hero)
-        self.CollMan.add(self.asteroid1)
-        self.CollMan.add(self.asteroid2)
+        # self.CollMan.clear()
+        # self.CollMan.add(self.hero)
+        # self.CollMan.add(self.asteroid1)
+        # self.CollMan.add(self.asteroid2)
+        self.check_known()
+
+        self.counter(self.i)
+        self.i = (self.i + 1)
+        if (self.i > 1000):
+            self.remove(self.msg_counter)
+
 
 
 if __name__ == "__main__":
@@ -151,7 +195,8 @@ if __name__ == "__main__":
     game_layer = GameLayer()
 
     # A scene that contains the layer hello_layer
-    main_scene = cocos.scene.Scene(hello_layer, game_layer)
+    # main_scene = cocos.scene.Scene(hello_layer, game_layer)
+    main_scene = cocos.scene.Scene(game_layer)
 
     # And now, start the application, starting with main_scene
     cocos.director.director.run(main_scene)
