@@ -59,6 +59,7 @@ class HeroShipMovement(actions.Move):
         velocity_y = 200 * (keyboard[key.UP] - keyboard[key.DOWN])
         self.target.velocity = (velocity_x, velocity_y)
 
+
         #move = self.target.position
         #for move in range(0, 400):
            # move = move + 25
@@ -70,13 +71,7 @@ class HeroShipMovement2(actions.Move):
         velocity_x = 200 * (keyboard[key.RIGHT] - keyboard[key.LEFT])
         velocity_y = 200 * (keyboard[key.UP] - keyboard[key.DOWN])
         self.target.velocity = (velocity_x, velocity_y)
-
-        self.msg_pos_x = cocos.text.Label('HSM2_MSG_POS_X = ',
-                            font_name='Times New Roman',
-                            font_size=32,
-                            anchor_x='center', anchor_y='center')
-        self.msg_counter.position = (120, 240)
-        self.add(self.msg_pos_x)
+        #self.add(self.msg_pos_x)
 
 
 
@@ -95,13 +90,13 @@ class TestSprite(cocos.sprite.Sprite):
         self.position = (100, 100)
         self.velocity = (0,0)
         self.cshape = cm.AARectShape(eu.Vector2(self.position), 32, 32)
-
-        self.msg_counter = cocos.text.Label('Count = ' + str(count),
+        shipPosition = self.target.position
+        self.msg_counter = cocos.text.Label(str(shipPosition),
                             font_name='Times New Roman',
                             font_size=32,
                             anchor_x='center', anchor_y='center')
-        msg_x = 120
-        self.msg_counter.position = ((120 + count), 240 + count)
+
+        self.msg_counter.position = (120, 240)
         self.add(self.msg_counter)
 
 
@@ -136,6 +131,7 @@ class GameLayer(cocos.layer.Layer):
         self.CollMan.add(self.asteroid2)
 
 
+
         #self.check_known
         # self.check_list()
 
@@ -143,13 +139,24 @@ class GameLayer(cocos.layer.Layer):
         self.i = 100
         self.schedule(self.update)
 
+    def displayX(self):
+         self.msg_counter = cocos.text.Label(str(self.hero.position),
+                                 font_name='Times New Roman',
+                                 font_size=32,
+                                 anchor_x='center', anchor_y='center')
+         self.msg_counter.position = (25, 25)
+         self.add(self.msg_counter)
+
+
+
 
     def add_hero(self):
         heroImage = pyglet.resource.image('hero.png')
         # hero = cocos.sprite.Sprite(heroImage)
         self.hero = HeroShip(heroImage)
         # hero.position = (150, 150)
-        self.hero.do(HeroShipMovement())
+        #self.hero.do(HeroShipMovement())
+        self.hero.do(HeroShipMovement2())
         self.add(self.hero)
 
     def add_boss(self):
@@ -231,6 +238,7 @@ class GameLayer(cocos.layer.Layer):
         #self.CollMan.add(self.asteroid2)
         self.check_known()
         #self.check_collision()
+        self.displayX()
 
 
         self.counter(self.i)
