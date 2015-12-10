@@ -64,6 +64,21 @@ class HeroShipMovement(actions.Move):
            # move = move + 25
            # self.target.position = move;
 
+class HeroShipMovement2(actions.Move):
+    def step(self, dt):
+        super(HeroShipMovement2, self).step(dt)
+        velocity_x = 200 * (keyboard[key.RIGHT] - keyboard[key.LEFT])
+        velocity_y = 200 * (keyboard[key.UP] - keyboard[key.DOWN])
+        self.target.velocity = (velocity_x, velocity_y)
+
+        self.msg_pos_x = cocos.text.Label('HSM2_MSG_POS_X = ',
+                            font_name='Times New Roman',
+                            font_size=32,
+                            anchor_x='center', anchor_y='center')
+        self.msg_counter.position = (120, 240)
+        self.add(self.msg_pos_x)
+
+
 
 class HeroShip(cocos.sprite.Sprite):
     def __init__(self, image):
@@ -75,7 +90,7 @@ class HeroShip(cocos.sprite.Sprite):
 
 class TestSprite(cocos.sprite.Sprite):
     def __init__(self, image):
-        super(HeroShip, self).__init__(image)
+        super(TestSprite, self).__init__(image)
         self.image = image
         self.position = (100, 100)
         self.velocity = (0,0)
