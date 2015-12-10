@@ -90,16 +90,22 @@ class GameLayer(cocos.layer.Layer):
 
     def __init__(self):
         super(GameLayer, self).__init__()
-        self.CollMan = cm.CollisionManager()
+        # self.CollMan = cm.CollisionManager()
+        self.CollMan = cm.CollisionManagerGrid(0.0, 640,
+                                               0.0, 480,
+                                                    100,
+                                                    100)
         self.add_hero()
         self.add_asteroids()
         self.boom()
         # self.add_boss()
-        self.CollMan.add(self.hero)
-        self.CollMan.add(self.asteroid1)
-        self.CollMan.add(self.asteroid2)
+        # self.CollMan.add(self.hero)
+        # self.CollMan.add(self.asteroid1)
+        # self.CollMan.add(self.asteroid2)
 
-        self.check_known
+        # self.check_known
+        # self.check_list()
+
         # iterator for "count" method test.
         self.i = 100
         self.schedule(self.update)
@@ -151,8 +157,20 @@ class GameLayer(cocos.layer.Layer):
                                  font_size=32,
                                  anchor_x='center', anchor_y='center')
         msg_x = 120
-        self.msg_counter.position = ((120 + count), 240)
+        self.msg_counter.position = ((120 + count), 240 + count)
         self.add(self.msg_counter)
+
+    def check_list(self):
+        count_list = 0
+        for item in self.CollMan.known_objs():
+            count_list = (count +1)
+        self.msg_count_list = cocos.text.Label('Count from list = ' + str(count_list),
+                                 font_name='Times New Roman',
+                                 font_size=32,
+                                 anchor_x='center', anchor_y='center')
+
+        self.msg_boom.position = 320, 440
+        self.add(self.msg_count_list)
 
     def check_collision(self):
         for other in self.CollMan.iter_colliding(self.hero):
@@ -166,11 +184,12 @@ class GameLayer(cocos.layer.Layer):
 
     # def update(self, dt):
     def update(self, dt):
+        pass
         # self.CollMan.clear()
         # self.CollMan.add(self.hero)
         # self.CollMan.add(self.asteroid1)
         # self.CollMan.add(self.asteroid2)
-        self.check_known()
+        # self.check_known()
 
         self.counter(self.i)
         self.i = (self.i + 1)
@@ -184,7 +203,8 @@ if __name__ == "__main__":
     global keyboard
 
     # director init takes the same arguments as pyglet.window
-    cocos.director.director.init()
+    # cocos.director.director.init()
+    director.init(width=640, height=480, autoscale=True, resizable = True)
 
     #initializing pyglet, which allows for keyboard import for character movement
     keyboard = key.KeyStateHandler()
