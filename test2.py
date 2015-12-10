@@ -91,19 +91,20 @@ class GameLayer(cocos.layer.Layer):
     def __init__(self):
         super(GameLayer, self).__init__()
         # self.CollMan = cm.CollisionManager()
-        self.CollMan = cm.CollisionManagerGrid(0.0, 640,
-                                               0.0, 480,
-                                                    100,
-                                                    100)
+        #self.CollMan = cm.CollisionManagerGrid(0.0, 640,
+                                               #0.0, 480,
+                                                   # 100,
+                                                    #100)
+        self.CollMan = cm.CollisionManagerBruteForce()
         self.add_hero()
         self.add_asteroids()
-        self.boom()
+        #self.boom()
         # self.add_boss()
-        # self.CollMan.add(self.hero)
-        # self.CollMan.add(self.asteroid1)
-        # self.CollMan.add(self.asteroid2)
+        self.CollMan.add(self.hero)
+        self.CollMan.add(self.asteroid1)
+        self.CollMan.add(self.asteroid2)
 
-        # self.check_known
+        #self.check_known
         # self.check_list()
 
         # iterator for "count" method test.
@@ -185,11 +186,11 @@ class GameLayer(cocos.layer.Layer):
     # def update(self, dt):
     def update(self, dt):
         pass
-        # self.CollMan.clear()
-        # self.CollMan.add(self.hero)
-        # self.CollMan.add(self.asteroid1)
-        # self.CollMan.add(self.asteroid2)
-        # self.check_known()
+        #self.CollMan.clear()
+        #self.CollMan.add(self.hero)
+        #self.CollMan.add(self.asteroid1)
+        #self.CollMan.add(self.asteroid2)
+        self.check_known()
 
         self.counter(self.i)
         self.i = (self.i + 1)

@@ -117,6 +117,7 @@ class GameLayer(cocos.layer.Layer):
         self.add_asteroids()
         # self.add_boss()
         self.CollMan = cm.CollisionManager()
+        self.schedule(self.update)
 
     def add_hero(self):
         heroImage = pyglet.resource.image('hero.png')
@@ -155,7 +156,14 @@ class GameLayer(cocos.layer.Layer):
         self.CollMan.clear()
         self.CollMan.add(self.hero)
         self.CollMan.add(self.asteroid)
-        self.CollMan.they_collide(self.hero, self.asteroid)
+        collide = self.CollMan.they_collide(self.hero, self.asteroid)
+        if collide == True:
+                label = cocos.text.Label('Hello, World!',
+                                 font_name='Times New Roman',
+                                 font_size=32,
+                                 anchor_x='center', anchor_y='center')
+
+                label.position = 320, 240
 
 
 main()
