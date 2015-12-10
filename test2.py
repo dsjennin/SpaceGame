@@ -104,12 +104,14 @@ class GameLayer(cocos.layer.Layer):
         self.CollMan.add(self.asteroid1)
         self.CollMan.add(self.asteroid2)
 
+
         #self.check_known
         # self.check_list()
 
         # iterator for "count" method test.
         self.i = 100
         self.schedule(self.update)
+
 
     def add_hero(self):
         heroImage = pyglet.resource.image('hero.png')
@@ -161,10 +163,10 @@ class GameLayer(cocos.layer.Layer):
         self.msg_counter.position = ((120 + count), 240 + count)
         self.add(self.msg_counter)
 
-        if (count % 10 == 0):
+        if (count % 1000 == 0):
             self.remove(self.msg_counter)
 
-        self.remove(self.msg_counter)
+        #self.remove(self.msg_counter)
 
 
     def check_list(self):
@@ -198,6 +200,7 @@ class GameLayer(cocos.layer.Layer):
         #self.CollMan.add(self.asteroid2)
         self.check_known()
         #self.check_collision()
+
 
         self.counter(self.i)
         self.i = (self.i + 1)
