@@ -73,6 +73,22 @@ class HeroShip(cocos.sprite.Sprite):
         self.velocity = (0,0)
         self.cshape = cm.AARectShape(eu.Vector2(self.position), 32, 32)
 
+class TestSprite(cocos.sprite.Sprite):
+    def __init__(self, image):
+        super(HeroShip, self).__init__(image)
+        self.image = image
+        self.position = (100, 100)
+        self.velocity = (0,0)
+        self.cshape = cm.AARectShape(eu.Vector2(self.position), 32, 32)
+
+        self.msg_counter = cocos.text.Label('Count = ' + str(count),
+                            font_name='Times New Roman',
+                            font_size=32,
+                            anchor_x='center', anchor_y='center')
+        msg_x = 120
+        self.msg_counter.position = ((120 + count), 240 + count)
+        self.add(self.msg_counter)
+
 
 class Asteroid(cocos.sprite.Sprite):
     def __init__(self, image, position):
