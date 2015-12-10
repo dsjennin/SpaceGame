@@ -161,6 +161,11 @@ class GameLayer(cocos.layer.Layer):
         self.msg_counter.position = ((120 + count), 240 + count)
         self.add(self.msg_counter)
 
+        if (count % 10 == 0):
+            self.remove(self.msg_counter)
+
+        self.remove(self.msg_counter)
+
 
     def check_list(self):
         count_list = 0
