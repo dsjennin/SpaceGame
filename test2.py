@@ -142,6 +142,8 @@ class GameLayer(cocos.layer.Layer):
 
         self.asteroid_list = set()
         self.asteroid_list.add(self.asteroid_x)
+        self.asteroid_list.add(self.asteroid1)
+        self.asteroid_list.add(self.asteroid2)
 
         # self.counter(self.i)
         self.add_count_label()
