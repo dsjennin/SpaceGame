@@ -239,8 +239,8 @@ class GameLayer(cocos.layer.Layer):
         self.msg_pos_x.element.text = (str(self.hero.position))
 
     def update_proximity_label(self):
-        proximity = (self.asteroid_x.position[0] - self.hero.position[0],
-                     self.asteroid_x.position[1] - self.hero.position[1])
+        proximity = (abs(self.asteroid_x.position[0] - self.hero.position[0]),
+                     abs(self.asteroid_x.position[1] - self.hero.position[1]))
         # self.msg_proximity.element.text = (str(self.asteroid_x.position))
         self.msg_proximity.element.text = (str(proximity))
 
