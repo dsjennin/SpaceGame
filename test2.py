@@ -260,7 +260,7 @@ class GameLayer(cocos.layer.Layer):
             self.boom()
 
     def check_proximity(self):
-        if (self.hero.position[0] > 500.0):
+        if ((self.hero.position[0] > 500.0 )and (self.hero.position[1] > 500.0)):
             self.boom()
 
 
