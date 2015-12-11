@@ -140,6 +140,9 @@ class GameLayer(cocos.layer.Layer):
         #proximity to check distance between hero & test asteroid.
         self.proximity = (0.0, 0.0)
 
+        self.asteroid_list = set()
+        self.asteroid_list.add(self.asteroid_x)
+
         # self.counter(self.i)
         self.add_count_label()
         self.add_pos_x_label()
@@ -285,12 +288,12 @@ class GameLayer(cocos.layer.Layer):
             self.boom()
 
     def check_proximity(self):
-        self.proximity = (abs(self.asteroid_x.position[0] - self.hero.position[0]),
-                     abs(self.asteroid_x.position[1] - self.hero.position[1]))
-
-        # if ((self.hero.position[0] > 500.0 )and (self.hero.position[1] > 500.0)):
-        if ((self.proximity[0] < 25.0 ) and (self.proximity[1] < 25.0)):
-            self.boom()
+        for asteroid in self.asteroid_list:
+            self.proximity = (abs(asteroid.position[0] - self.hero.position[0]),
+                              abs(asteroid.position[1] - self.hero.position[1]))
+            # if ((self.hero.position[0] > 500.0 )and (self.hero.position[1] > 500.0)):
+            if ((self.proximity[0] < 25.0 ) and (self.proximity[1] < 25.0)):
+                self.boom()
 
 
     # def update(self, dt):
