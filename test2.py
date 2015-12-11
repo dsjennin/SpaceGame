@@ -270,7 +270,7 @@ class GameLayer(cocos.layer.Layer):
     def check_list(self):
         count_list = 0
         for item in self.CollMan.known_objs():
-            count_list = (count +1)
+            count_list = (self.count +1)
         self.msg_count_list = cocos.text.Label('Count from list = ' + str(count_list),
                                  font_name='Times New Roman',
                                  font_size=32,
@@ -297,6 +297,10 @@ class GameLayer(cocos.layer.Layer):
             if ((self.proximity[0] < 25.0 ) and (self.proximity[1] < 25.0)):
                 self.boom()
 
+    def check_boom(self):
+        for asteroid in self.asteroid_list:
+            if (asteroid.position[1] < 0):
+                self.boom()
 
     # def update(self, dt):
     def update(self, dt):
@@ -318,10 +322,9 @@ class GameLayer(cocos.layer.Layer):
         self.update_pos_x_label()
         self.check_proximity()
         self.update_proximity_label()
+        self.check_boom()
         # if (self.i > 1000):
         #     self.remove(self.msg_counter)
-
-
 
 if __name__ == "__main__":
 
