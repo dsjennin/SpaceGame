@@ -141,9 +141,11 @@ class GameLayer(cocos.layer.Layer):
         self.proximity = (0.0, 0.0)
 
         self.asteroid_list = set()
+        self.remove_asteroid_list = set()
         self.asteroid_list.add(self.asteroid_x)
         self.asteroid_list.add(self.asteroid1)
         self.asteroid_list.add(self.asteroid2)
+
 
         # self.counter(self.i)
         self.add_count_label()
@@ -297,10 +299,16 @@ class GameLayer(cocos.layer.Layer):
             if ((self.proximity[0] < 25.0 ) and (self.proximity[1] < 25.0)):
                 self.boom()
 
-    def check_boom(self):
+    def remove_asteroid(self):
         for asteroid in self.asteroid_list:
             if (asteroid.position[1] < 0):
-                self.boom()
+                self.remove_asteroid_list.add(asteroid)
+
+        for removable_asteroid in self.remove_asteroid_list:
+            self.asteroid_list.remove(removable_asteroid)
+            self.remove(removable_asteroid)
+        self.remove_asteroid_list.clear()
+
 
     # def update(self, dt):
     def update(self, dt):
@@ -322,7 +330,7 @@ class GameLayer(cocos.layer.Layer):
         self.update_pos_x_label()
         self.check_proximity()
         self.update_proximity_label()
-        self.check_boom()
+        self.remove_asteroid()
         # if (self.i > 1000):
         #     self.remove(self.msg_counter)
 
