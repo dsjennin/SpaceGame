@@ -124,6 +124,7 @@ class GameLayer(cocos.layer.Layer):
         self.CollMan = cm.CollisionManagerBruteForce()
         self.add_hero()
         self.add_asteroids()
+        self.add_asteroid()
         #self.boom()
         # self.add_boss()
         self.CollMan.add(self.hero)
@@ -139,6 +140,7 @@ class GameLayer(cocos.layer.Layer):
         # self.counter(self.i)
         self.add_count_label()
         self.add_pos_x_label()
+        self.add_proximity_label()
 
         self.schedule(self.update)
 
@@ -186,6 +188,13 @@ class GameLayer(cocos.layer.Layer):
         self.asteroid1.do(actions.MoveBy( (0, -600), 4) )
         self.asteroid2.do(actions.MoveBy( (100, -600), 8) )
 
+    def add_asteroid(self):
+        aster1Image = pyglet.resource.image('asteroid.png')
+        aster1Position = (320, 240)
+        aster1Velocity = (0, 0)
+        self.asteroid_x = Asteroid(aster1Image, aster1Position)
+        self.add(self.asteroid_x)
+
     def boom(self):
         self.msg_boom = cocos.text.Label('BOOM!',
                                  font_name='Times New Roman',
@@ -213,12 +222,27 @@ class GameLayer(cocos.layer.Layer):
         self.msg_pos_x.position = (200, 25)
         self.add(self.msg_pos_x)
 
+    def add_proximity_label(self):
+        self.msg_proximity = cocos.text.Label("TEST",
+                                 font_name='Times New Roman',
+                                 font_size=16,
+                                 anchor_x='center', anchor_y='center')
+
+        self.msg_proximity.position = (400, 50)
+        self.add(self.msg_proximity)
+
     def update_count_label(self, count_in):
         count = count_in
         self.msg_counter.element.text = (str(count))
 
     def update_pos_x_label(self):
         self.msg_pos_x.element.text = (str(self.hero.position))
+
+    def update_proximity_label(self):
+        proximity = (self.asteroid_x.position[0] - self.hero.position[0],
+                     self.asteroid_x.position[1] - self.hero.position[1])
+        # self.msg_proximity.element.text = (str(self.asteroid_x.position))
+        self.msg_proximity.element.text = (str(proximity))
 
     def counter(self, count_in):
         count = count_in
@@ -283,6 +307,7 @@ class GameLayer(cocos.layer.Layer):
         self.update_count_label(self.i)
         self.update_pos_x_label()
         self.check_proximity()
+        self.update_proximity_label()
         # if (self.i > 1000):
         #     self.remove(self.msg_counter)
 
