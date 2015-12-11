@@ -137,6 +137,9 @@ class GameLayer(cocos.layer.Layer):
         # iterator for "count" method test.
         self.i = 0
 
+        #proximity to check distance between hero & test asteroid.
+        self.proximity = (0.0, 0.0)
+
         # self.counter(self.i)
         self.add_count_label()
         self.add_pos_x_label()
@@ -207,10 +210,10 @@ class GameLayer(cocos.layer.Layer):
     def add_count_label(self):
         self.msg_counter = cocos.text.Label("TEST",
                                  font_name='Times New Roman',
-                                 font_size=32,
+                                 font_size=16,
                                  anchor_x='center', anchor_y='center')
 
-        self.msg_counter.position = (120, 240)
+        self.msg_counter.position = (50, 450)
         self.add(self.msg_counter)
 
     def add_pos_x_label(self):
@@ -239,10 +242,8 @@ class GameLayer(cocos.layer.Layer):
         self.msg_pos_x.element.text = (str(self.hero.position))
 
     def update_proximity_label(self):
-        proximity = (abs(self.asteroid_x.position[0] - self.hero.position[0]),
-                     abs(self.asteroid_x.position[1] - self.hero.position[1]))
         # self.msg_proximity.element.text = (str(self.asteroid_x.position))
-        self.msg_proximity.element.text = (str(proximity))
+        self.msg_proximity.element.text = (str(self.proximity))
 
     def counter(self, count_in):
         count = count_in
@@ -284,7 +285,11 @@ class GameLayer(cocos.layer.Layer):
             self.boom()
 
     def check_proximity(self):
-        if ((self.hero.position[0] > 500.0 )and (self.hero.position[1] > 500.0)):
+        self.proximity = (abs(self.asteroid_x.position[0] - self.hero.position[0]),
+                     abs(self.asteroid_x.position[1] - self.hero.position[1]))
+
+        # if ((self.hero.position[0] > 500.0 )and (self.hero.position[1] > 500.0)):
+        if ((self.proximity[0] < 25.0 ) and (self.proximity[1] < 25.0)):
             self.boom()
 
 
