@@ -138,6 +138,7 @@ class GameLayer(cocos.layer.Layer):
 
         # self.counter(self.i)
         self.add_count_label()
+        self.add_pos_x_label()
 
         self.schedule(self.update)
 
@@ -203,9 +204,21 @@ class GameLayer(cocos.layer.Layer):
         self.msg_counter.position = (120, 240)
         self.add(self.msg_counter)
 
+    def add_pos_x_label(self):
+        self.msg_pos_x = cocos.text.Label("TEST",
+                                 font_name='Times New Roman',
+                                 font_size=32,
+                                 anchor_x='center', anchor_y='center')
+
+        self.msg_pos_x.position = (25, 25)
+        self.add(self.msg_pos_x)
+
     def update_count_label(self, count_in):
         count = count_in
         self.msg_counter.element.text = (str(count))
+
+    def update_pos_x_label(self):
+        self.msg_pos_x.element.text = (str(self.hero.position))
 
     def counter(self, count_in):
         count = count_in
@@ -249,13 +262,13 @@ class GameLayer(cocos.layer.Layer):
     # def update(self, dt):
     def update(self, dt):
         pass
-        #self.CollMan.clear()
-        #self.CollMan.add(self.hero)
-        #self.CollMan.add(self.asteroid1)
-        #self.CollMan.add(self.asteroid2)
+        # self.CollMan.clear()
+        # self.CollMan.add(self.hero)
+        # self.CollMan.add(self.asteroid1)
+        # self.CollMan.add(self.asteroid2)
         self.check_known()
-        #self.check_collision()
-        self.displayX()
+        # self.check_collision()
+        # self.displayX()
 
 
         # self.counter(self.i)
@@ -264,6 +277,7 @@ class GameLayer(cocos.layer.Layer):
         # self.msg_counter.count = self.i
         # self.counter(self.i)
         self.update_count_label(self.i)
+        self.update_pos_x_label()
         # if (self.i > 1000):
         #     self.remove(self.msg_counter)
 
