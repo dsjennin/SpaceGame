@@ -207,10 +207,10 @@ class GameLayer(cocos.layer.Layer):
     def add_pos_x_label(self):
         self.msg_pos_x = cocos.text.Label("TEST",
                                  font_name='Times New Roman',
-                                 font_size=32,
+                                 font_size=16,
                                  anchor_x='center', anchor_y='center')
 
-        self.msg_pos_x.position = (25, 25)
+        self.msg_pos_x.position = (200, 25)
         self.add(self.msg_pos_x)
 
     def update_count_label(self, count_in):
@@ -259,6 +259,11 @@ class GameLayer(cocos.layer.Layer):
         if self.CollMan.knows(self.hero):
             self.boom()
 
+    def check_proximity(self):
+        if (self.hero.position[0] > 500.0):
+            self.boom()
+
+
     # def update(self, dt):
     def update(self, dt):
         pass
@@ -266,10 +271,9 @@ class GameLayer(cocos.layer.Layer):
         # self.CollMan.add(self.hero)
         # self.CollMan.add(self.asteroid1)
         # self.CollMan.add(self.asteroid2)
-        self.check_known()
+        # self.check_known()
         # self.check_collision()
         # self.displayX()
-
 
         # self.counter(self.i)
         self.i = (self.i + 1)
@@ -278,6 +282,7 @@ class GameLayer(cocos.layer.Layer):
         # self.counter(self.i)
         self.update_count_label(self.i)
         self.update_pos_x_label()
+        self.check_proximity()
         # if (self.i > 1000):
         #     self.remove(self.msg_counter)
 
