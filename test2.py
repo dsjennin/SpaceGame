@@ -136,7 +136,8 @@ class GameLayer(cocos.layer.Layer):
         # self.check_list()
 
         # iterator for "count" method test.
-        self.i = 100
+        self.i = 0
+        self.counter(self.i)
         self.schedule(self.update)
 
     def displayX(self):
@@ -192,7 +193,8 @@ class GameLayer(cocos.layer.Layer):
         self.msg_boom.position = 320, 440
         self.add(self.msg_boom)
 
-    def counter(self, count):
+    def counter(self, count_in):
+        count = count_in
         self.msg_counter = cocos.text.Label('Count = ' + str(count),
                                  font_name='Times New Roman',
                                  font_size=32,
@@ -201,8 +203,8 @@ class GameLayer(cocos.layer.Layer):
         self.msg_counter.position = ((120 + count), 240 + count)
         self.add(self.msg_counter)
 
-        if (count % 1000 == 0):
-            self.remove(self.msg_counter)
+        # if (count % 1000 == 0):
+        #     self.remove(self.msg_counter)
 
         #self.remove(self.msg_counter)
 
@@ -241,8 +243,11 @@ class GameLayer(cocos.layer.Layer):
         self.displayX()
 
 
-        self.counter(self.i)
+        # self.counter(self.i)
         self.i = (self.i + 1)
+
+        self.msg_counter.count = self.i 
+
         if (self.i > 1000):
             self.remove(self.msg_counter)
 
