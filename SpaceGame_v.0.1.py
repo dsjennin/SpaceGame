@@ -8,7 +8,7 @@
 # quick list of things we can do to improve and expand the project.
 #
 # ToDo:
-# GamePlay:
+# -GamePlay:
 #   -Continuous asteroids.
 #   -Shooting.
 #   -Boss?
@@ -16,30 +16,43 @@
 #       -Music/Sound
 #       -Explosions/Particles
 #       -More sprites!
-#   -Environment:
-#       -Scrolling background.
-#       -Multiple layers.
-#   -Logic:
-#       -Scoring.
-#           -Keep track of high scores.
-#       -Levels.
-#   -Software:
-#       -Refactoring?
-#           -I expect there are many ways in which we could optimize
-#            memory allocation, etc.
-#       -Porting?
-#           -Different languages?
-#               -C++
-#               -Objective C / Swift?
-#               -Java?
-#           -Different platforms?
-#               -iOS?
-#               -Android?
-#               -Windows Phone? HA! Yeah, right...
-#       -Architecture:
-#           -Break out class definitions into header files?
-#           -Figure out how to read from and write to files.
-
+#       -Transitions between levels (once we add levels)
+#
+# -Environment:
+#   -Scrolling background.
+#   -Multiple layers.
+#
+# -Logic:
+#   -Scoring.
+#       -Keep track of high scores.
+#   -Levels.
+#
+# -Software, Intenal:
+#   *GET COLLISION MANAGER WORKING!!!
+#       -This is probably the single biggest obstacle.
+#       -"check_proximity(self)" is nice 'n all, but I expect the built-in
+#        collision manager is far more efficient and flexible.
+#   -Meta-data.
+#   -Constants.
+#       -We should declare a bunch up top to facilitate manipulation.
+#   -Refactoring?
+#       -I expect there are many ways in which we could optimize
+#        memory allocation, etc.
+#
+# -Software, External:
+#   -Architecture:
+#       -Break out class definitions into header files?
+#       -Figure out how to read from and write to files.
+#   -Porting?
+#       -Different languages?
+#           -C++
+#           -Objective C / Swift?
+#           -Java?
+#       -Different platforms?
+#           -iOS?
+#           -Android?
+#           -Windows Phone? HA! Yeah, right...
+#
 
 
 from __future__ import division, print_function, unicode_literals
