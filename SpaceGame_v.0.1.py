@@ -38,6 +38,8 @@
 #   -Refactoring?
 #       -I expect there are many ways in which we could optimize
 #        memory allocation, etc.
+#   -Unit tests.
+#       -Seriously? Well, yes. I'm told it's a thing.
 #
 # -Software, External:
 #   -Architecture:
