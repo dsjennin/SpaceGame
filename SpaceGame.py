@@ -115,6 +115,19 @@ class Asteroid(cocos.sprite.Sprite):
         self.cshape = cm.CircleShape(eu.Vector2(self.position), 16)
         self.type = 'asteroid'
 
+    @staticmethod
+    def random_starting_position():
+        xrange = random.randrange(20, 2000)
+        yrange = 450
+        return (xrange, yrange)
+
+    @staticmethod
+    def random_offset():
+      return (random.randint(0, 100), random.randint(-600, -100))
+
+    @staticmethod
+    def random_speed():
+      return random.randint(5,12)
 
 class GameLayer(cocos.layer.Layer):
 
@@ -179,14 +192,14 @@ class GameLayer(cocos.layer.Layer):
         self.add(self.asteroid_x)
 
     def generate_asteroids(self):
-        if (len(self.asteroid_list) < 1):
+        if (len(self.asteroid_list) < 10):
             asterImage = pyglet.resource.image('assets/asteroid.png')
-            asterPos = (150, 450)
+            asterPos = Asteroid.random_starting_position()
             asterVel = (0, 0)
             self.asteroid_dict[self.asteroid_count] = Asteroid(asterImage, asterPos)
             self.add(self.asteroid_dict[self.asteroid_count])
             self.asteroid_list.add(self.asteroid_dict[self.asteroid_count])
-            self.asteroid_dict[self.asteroid_count].do(actions.MoveBy((0, -600), 4))
+            self.asteroid_dict[self.asteroid_count].do(actions.MoveBy(Asteroid.random_offset(), Asteroid.random_speed()))
             self.asteroid_count += 1
 
     def boom(self):
