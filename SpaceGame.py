@@ -83,11 +83,18 @@ from cocos import actions, layer, sprite, scene
 
 #class for movement of main character
 class HeroShipMovement(actions.Move):
+    def keyboard_diffs(self, first, second):
+      return keyboard[first] - keyboard[second]
+
+    def keyboard_x(self):
+      return self.keyboard_diffs(key.RIGHT, key.LEFT)
+
+    def keyboard_y(self):
+      return self.keyboard_diffs(key.UP, key.DOWN)
+
     def step(self, dt):
         super(HeroShipMovement, self).step(dt)
-        velocity_x = 200 * (keyboard[key.RIGHT] - keyboard[key.LEFT])
-        velocity_y = 200 * (keyboard[key.UP] - keyboard[key.DOWN])
-        self.target.velocity = (velocity_x, velocity_y)
+        self.target.velocity = (self.keyboard_x() * 200, self.keyboard_y() * 200)
 
 
 class HeroShip(cocos.sprite.Sprite):
