@@ -195,11 +195,11 @@ class GameLayer(cocos.layer.Layer):
         if (len(self.asteroid_list) < 10):
             asterImage = pyglet.resource.image('assets/asteroid.png')
             asterPos = Asteroid.random_starting_position()
-            asterVel = (0, 0)
-            self.asteroid_dict[self.asteroid_count] = Asteroid(asterImage, asterPos)
-            self.add(self.asteroid_dict[self.asteroid_count])
-            self.asteroid_list.add(self.asteroid_dict[self.asteroid_count])
-            self.asteroid_dict[self.asteroid_count].do(actions.MoveBy(Asteroid.random_offset(), Asteroid.random_speed()))
+            
+            asteroid = Asteroid(asterImage, asterPos)
+            asteroid.do(actions.MoveBy(Asteroid.random_offset(), Asteroid.random_speed()))
+            self.asteroid_list.add(asteroid)
+            self.add(asteroid)
             self.asteroid_count += 1
 
     def boom(self):
