@@ -298,7 +298,7 @@ if __name__ == "__main__":
 
     #creating a background layer
     background_layer = layer.Layer()
-    background = sprite.Sprite('assets/space_wallpaper.jpeg')
+    background = sprite.Sprite('assets/perseus2.png')
     background.position = (350, 300)
     background_layer.add(background)
 
