@@ -129,6 +129,9 @@ class Asteroid(cocos.sprite.Sprite):
     def random_speed():
       return random.randint(3,21)
 
+    def offscreen(self):
+      return self.position[1] < 10
+
 class GameLayer(cocos.layer.Layer):
 
     is_event_handler = True
@@ -233,14 +236,14 @@ class GameLayer(cocos.layer.Layer):
                 self.boom()
 
     def remove_asteroid(self):
+        to_remove = set()
         for asteroid in self.asteroid_list:
-            if (asteroid.position[1] < 10):
-                self.remove_asteroid_list.add(asteroid)
+            if (asteroid.offscreen()):
+                to_remove.add(asteroid)
 
-        for removable_asteroid in self.remove_asteroid_list:
+        for removable_asteroid in to_remove:
             self.asteroid_list.remove(removable_asteroid)
             self.remove(removable_asteroid)
-        self.remove_asteroid_list.clear()
 
     def update(self, dt):
         self.generate_asteroids()
