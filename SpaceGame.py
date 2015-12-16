@@ -117,17 +117,17 @@ class Asteroid(cocos.sprite.Sprite):
 
     @staticmethod
     def random_starting_position():
-        xrange = random.randrange(20, 2000)
+        xrange = random.randrange(20, 500)
         yrange = 450
         return (xrange, yrange)
 
     @staticmethod
     def random_offset():
-      return (random.randint(0, 100), random.randint(-600, -100))
+      return (random.randint(-900, 900), -600)
 
     @staticmethod
     def random_speed():
-      return random.randint(5,12)
+      return random.randint(3,21)
 
 class GameLayer(cocos.layer.Layer):
 
