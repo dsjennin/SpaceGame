@@ -242,16 +242,6 @@ class GameLayer(cocos.layer.Layer):
         # self.msg_proximity.element.text = (str(self.asteroid_x.position))
         self.msg_proximity.element.text = (str(self.proximity))
 
-    def counter(self, count_in):
-        count = count_in
-        self.msg_counter = cocos.text.Label('Count = ' + str(count),
-                                 font_name='Times New Roman',
-                                 font_size=32,
-                                 anchor_x='center', anchor_y='center')
-        msg_x = 120
-        self.msg_counter.position = (120, 240)
-        self.add(self.msg_counter)
-
     def check_proximity(self):
         for asteroid in self.asteroid_list:
             self.proximity = (abs(asteroid.position[0] - self.hero.position[0]),
