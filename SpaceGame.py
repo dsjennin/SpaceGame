@@ -157,21 +157,14 @@ class GameLayer(cocos.layer.Layer):
     def __init__(self):
         super(GameLayer, self).__init__()
         self.add_hero()
-        # self.add_asteroid()
 
-        # iterator for "count" method test.
         self.frame_count = 0
 
         #proximity to check distance between hero & test asteroid.
         self.proximity = (0.0, 0.0)
 
-        self.asteroid_dict = {}
-
         self.asteroid_list = set()
         self.remove_asteroid_list = set()
-        # self.asteroid_list.add(self.asteroid_x)
-        # self.asteroid_list.add(self.asteroid1)
-        # self.asteroid_list.add(self.asteroid2)
 
         self.add_count_label()
         self.add_pos_x_label()
