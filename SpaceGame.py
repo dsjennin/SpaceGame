@@ -140,12 +140,11 @@ class GameLayer(cocos.layer.Layer):
         # self.add_asteroid()
 
         # iterator for "count" method test.
-        self.i = 0
+        self.frame_count = 0
 
         #proximity to check distance between hero & test asteroid.
         self.proximity = (0.0, 0.0)
 
-        self.asteroid_count = 0
         self.asteroid_dict = {}
 
         self.asteroid_list = set()
@@ -154,7 +153,6 @@ class GameLayer(cocos.layer.Layer):
         # self.asteroid_list.add(self.asteroid1)
         # self.asteroid_list.add(self.asteroid2)
 
-        # self.counter(self.i)
         self.add_count_label()
         self.add_pos_x_label()
         self.add_proximity_label()
@@ -200,7 +198,6 @@ class GameLayer(cocos.layer.Layer):
             asteroid.do(actions.MoveBy(Asteroid.random_offset(), Asteroid.random_speed()))
             self.asteroid_list.add(asteroid)
             self.add(asteroid)
-            self.asteroid_count += 1
 
     def boom(self):
         self.msg_boom = cocos.text.Label('BOOM!',
@@ -234,9 +231,9 @@ class GameLayer(cocos.layer.Layer):
         self.msg_proximity.position = (400, 50)
         self.add(self.msg_proximity)
 
-    def update_count_label(self, count_in):
-        count = count_in
-        self.msg_counter.element.text = (str(count))
+    def increment_frame_count(self):
+        self.frame_count = self.frame_count + 1
+        self.msg_counter.element.text = (str(self.frame_count))
 
     def update_pos_x_label(self):
         self.msg_pos_x.element.text = (str(self.hero.position))
@@ -274,10 +271,8 @@ class GameLayer(cocos.layer.Layer):
         self.remove_asteroid_list.clear()
 
     def update(self, dt):
-        self.i = (self.i + 1)
-
         self.generate_asteroids()
-        self.update_count_label(self.i)
+        self.increment_frame_count()
         self.update_pos_x_label()
         self.check_proximity()
         self.update_proximity_label()
