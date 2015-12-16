@@ -136,7 +136,6 @@ class GameLayer(cocos.layer.Layer):
     def __init__(self):
         super(GameLayer, self).__init__()
         self.add_hero()
-        # self.add_asteroids()
         # self.add_asteroid()
 
         # iterator for "count" method test.
@@ -164,23 +163,6 @@ class GameLayer(cocos.layer.Layer):
         self.hero = HeroShip(heroImage)
         self.hero.do(HeroShipMovement())
         self.add(self.hero)
-
-    def add_asteroids(self):
-        aster1Image = pyglet.resource.image('assets/asteroid.png')
-        aster1Position = (150, 550)
-        aster1Velocity = (0, 1000)
-
-        aster2Image = pyglet.resource.image('assets/asteroid_2.png')
-        aster2Position = (200, 500)
-        aster2Velocity = (100, 25)
-
-        self.asteroid1 = Asteroid(aster1Image, aster1Position)
-        self.asteroid2 = Asteroid(aster2Image, aster2Position)
-        self.add(self.asteroid1)
-        self.add(self.asteroid2)
-
-        self.asteroid1.do(actions.MoveBy( (0, -600), 4) )
-        self.asteroid2.do(actions.MoveBy( (100, -600), 8) )
 
     def add_asteroid(self):
         aster1Image = pyglet.resource.image('assets/asteroid.png')
