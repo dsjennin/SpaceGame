@@ -153,6 +153,7 @@ class BackgroundLayer(cocos.layer.Layer):
 class GameLayer(cocos.layer.Layer):
 
     is_event_handler = True
+    collisionManager = cm.CollisionManager()
 
     def __init__(self):
         super(GameLayer, self).__init__()
@@ -162,6 +163,7 @@ class GameLayer(cocos.layer.Layer):
 
         #proximity to check distance between hero & test asteroid.
         self.proximity = (0.0, 0.0)
+        self.collman = cm.CollisionManager()
 
         self.asteroid_list = set()
         self.remove_asteroid_list = set()
@@ -177,6 +179,7 @@ class GameLayer(cocos.layer.Layer):
         self.hero = HeroShip(heroImage)
         self.hero.do(HeroShipMovement())
         self.add(self.hero)
+        GameLayer.collisionManager.add(self.hero)
 
     def add_asteroid(self):
         aster1Image = pyglet.resource.image('assets/asteroid.png')
@@ -189,11 +192,12 @@ class GameLayer(cocos.layer.Layer):
         if (len(self.asteroid_list) < Asteroid.onscreen_count()):
             asterImage = pyglet.resource.image('assets/asteroid.png')
             asterPos = Asteroid.random_starting_position()
-            
+
             asteroid = Asteroid(asterImage, asterPos)
             asteroid.do(actions.MoveBy(Asteroid.random_offset(), Asteroid.random_speed()))
             self.asteroid_list.add(asteroid)
             self.add(asteroid)
+            return asteroid
 
     def boom(self):
         self.msg_boom = cocos.text.Label('BOOM!',
@@ -258,7 +262,10 @@ class GameLayer(cocos.layer.Layer):
             self.remove(removable_asteroid)
 
     def update(self, dt):
-        self.generate_asteroids()
+        new_asteroid = self.generate_asteroids()
+        self.collman.add(new_asteroid)
+        import pdb; pdb.set_trace();
+
         self.increment_frame_count()
         self.update_pos_x_label()
         self.check_proximity()
