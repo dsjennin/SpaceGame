@@ -144,6 +144,12 @@ class Asteroid(cocos.sprite.Sprite):
     def offscreen(self):
       return self.position[1] < 10
 
+class BackgroundLayer(cocos.layer.Layer):
+    def __init__(self):
+        super(BackgroundLayer, self).__init__()
+        background = sprite.Sprite('assets/perseus2.png')
+        self.add(background)
+
 class GameLayer(cocos.layer.Layer):
 
     is_event_handler = True
@@ -279,18 +285,12 @@ if __name__ == "__main__":
     keyboard = key.KeyStateHandler()
     director.window.push_handlers(keyboard)
 
-    #creating a background layer
-    background_layer = layer.Layer()
-    background = sprite.Sprite('assets/perseus2.png')
-    background.position = (350, 300)
-    background_layer.add(background)
 
 
-    game_layer = GameLayer()
 
     # A scene that contains the layer hello_layer
     # main_scene = cocos.scene.Scene(hello_layer, game_layer)
-    main_scene = cocos.scene.Scene(background_layer, game_layer)
+    main_scene = cocos.scene.Scene(BackgroundLayer(), GameLayer())
 
     # And now, start the application, starting with main_scene
     cocos.director.director.run(main_scene)
