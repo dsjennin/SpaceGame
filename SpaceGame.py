@@ -107,6 +107,9 @@ class HeroShip(cocos.sprite.Sprite):
 
 
 class Asteroid(cocos.sprite.Sprite):
+    asteroids_onscreen = 3  # on screen at any one time
+    asteroids_max   = 50 # let's not get too many on screen at any one time
+
     def __init__(self, image, position):
         super(Asteroid, self).__init__(image)
         self.image = image
@@ -114,7 +117,16 @@ class Asteroid(cocos.sprite.Sprite):
         self.velocity = (0,0)
         self.cshape = cm.CircleShape(eu.Vector2(self.position), 16)
         self.type = 'asteroid'
-
+   
+    @staticmethod
+    def onscreen_count():
+      return Asteroid.asteroids_onscreen
+    
+    @staticmethod
+    def increment_onscreen_count(increment):
+      if Asteroid.asteroids_onscreen < Asteroid.asteroids_max:
+        Asteroid.asteroids_onscreen = Asteroid.asteroids_onscreen + increment
+    
     @staticmethod
     def random_starting_position():
         xrange = random.randrange(20, 500)
@@ -175,7 +187,7 @@ class GameLayer(cocos.layer.Layer):
         self.add(self.asteroid_x)
 
     def generate_asteroids(self):
-        if (len(self.asteroid_list) < 10):
+        if (len(self.asteroid_list) < Asteroid.onscreen_count()):
             asterImage = pyglet.resource.image('assets/asteroid.png')
             asterPos = Asteroid.random_starting_position()
             
@@ -240,6 +252,7 @@ class GameLayer(cocos.layer.Layer):
         for asteroid in self.asteroid_list:
             if (asteroid.offscreen()):
                 to_remove.add(asteroid)
+                Asteroid.increment_onscreen_count(1) # increase the limit everytime we lose one
 
         for removable_asteroid in to_remove:
             self.asteroid_list.remove(removable_asteroid)
