@@ -263,8 +263,15 @@ class GameLayer(cocos.layer.Layer):
 
     def update(self, dt):
         new_asteroid = self.generate_asteroids()
+
+        self.collman.clear()
         self.collman.add(new_asteroid)
-        import pdb; pdb.set_trace();
+        for z, node in self.children:
+          self.collman.add(node)
+
+        #for other in self.collman.iter_colliding(self.hero):
+        for other in self.collman.known_objs():
+         self.boom()
 
         self.increment_frame_count()
         self.update_pos_x_label()
